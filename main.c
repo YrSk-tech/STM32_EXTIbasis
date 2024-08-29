@@ -157,10 +157,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_D1_GPIO_Port, LED_D1_Pin, GPIO_PIN_SET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_D2_GPIO_Port, LED_D2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_D1_Pin|LED_D2_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : BTN_K1_Pin BTN_K0_Pin */
   GPIO_InitStruct.Pin = BTN_K1_Pin|BTN_K0_Pin;
@@ -176,10 +173,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI3_IRQn, 1, 0);
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 15, 0);
   HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 14, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -187,7 +184,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback(uint8_tGPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	 if(GPIO_Pin == BTN_K0_Pin)
 	 {
@@ -205,6 +202,7 @@ void HAL_GPIO_EXTI_Callback(uint8_tGPIO_Pin)
 		 HAL_GPIO_WritePin(LED_D2_GPIO_Port, LED_D2_Pin, GPIO_PIN_SET);
 		 timeTest = 0;
 	 }
+
 }
 /* USER CODE END 4 */
 
