@@ -2,7 +2,8 @@
 
 
 Controlling LEDs with External Interrupt features by using button
-Configuration
+
+## Configuration
 ![extiioc](https://github.com/user-attachments/assets/19981446-2fd0-422f-8791-d196ac322294)
 
 
